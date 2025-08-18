@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='resources/favicon.png') }}"> <!-- Favicon -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+  <title>Perishable Inventory Replenishment Game</title>
+</head>
+<body>
+  <div id="app" class="app-container">
+    <h1>Thesis - Perishable Inventory Replenishment Game</h1>
+    <footer id="footer">
+      <p>© 2024 Anil Turgut MSc Thesis , All Rights Reserved.</p>
+    </footer>
+        <!-- Documentation Button -->
+    <button id="docBtn" onclick="openDocumentation()" title="View Game Documentation">
+      <img src="{{ url_for('static', filename='resources/question.png') }}" alt="Documentation" class="doc-image">
+    </button>
+    <!-- Modal Structure -->
+    <div id="docModal" class="modal">
+      <div class="modal-content">
+        <span class="close-btn" onclick="closeDocumentation()">&times;</span>
+        <h2>Game Documentation</h2>
+        <p>Welcome to the Perishable Inventory Replenishment Game! Here's how it works:</p>
+        <ul>
+          <li>Each day, the demand for the inventory is determined by the system.</li>
+          <li>As a player, you make replenishment decisions to manage the inventory efficiently.</li>
+          <li>The AI agent will also make replenishment decisions, competing against you.</li>
+          <li>The goal is to minimize your total cost over the game period.</li>
+          <li>The game ends when the predefined period or conditions are met.</li>
+          <li>After the game ends, you can reset to play again.</li>
+          <!-- Add more details here as needed -->
+        </ul>
+      </div>
+    </div>
+
+        <!-- Hyperparameters Button -->
+    <button id="hyperparametersBtn" class="icon-button">
+      <img src="{{ url_for('static', filename='resources/parameter.png') }}" alt="Parameters" />
+    </button>
+
+    <!-- Hyperparameters Popup -->
+    <div id="hyperparametersPopup" class="popup">
+      <div class="popup-content">
+        <span class="close" onclick="toggleHyperparametersPopup()">&times;</span>
+        <h2>Game Hyperparameters</h2>
+        <ul>
+          <li><strong>Planning Horizon:</strong> <span id="planning_horizon">{{ planning_horizon }}</span></li>
+          <li><strong>Product Life:</strong> <span id="product_life">{{ product_life }}</span></li>
+          <li><strong>Maximum Order Quantity:</strong> <span id="maximum_order_quantity">{{ maximum_order_quantity }}</span></li>
+          <li><strong>Ordering Cost:</strong> <span id="ordering_cost">{{ ordering_cost }}</span></li>
+          <li><strong>Holding Cost:</strong> <span id="holding_cost">{{ holding_cost }}</span></li>
+          <li><strong>Shortage Cost:</strong> <span id="shortage_cost">{{ shortage_cost }}</span></li>
+          <li><strong>Deterioration Cost:</strong> <span id="deterioration_cost">{{ deterioration_cost }}</span></li>
+          <li><strong>Lambda:</strong> <span id="lambda">{{ lambd }}</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Common Game Info: Day and Demand in the Center -->
+    <div class="common-info">
+      <div class="info-item">Game Number: <span id="game_number">1</span></div>
+      <div class="info-item">Day: <span id="day">1</span></div>
+      <div class="info-item">Demand: <span id="demand">0</span></div>
+    </div>    
+
+    <div class="user-agent-info">
+      <!-- User Information (Left) -->
+      <div class="user-info">
+        <h2>User Information</h2>
+        <div class="info-block" style="background-color: #ADD8E6;"> <!-- Light blue for user -->
+          <div>User Cost: <span id="userCost">0</span></div>
+          <div>Total User Cost: <span id="totalUserCost">0</span></div>
+          <div>User State: <span id="userState">[0, 0, 0]</span></div>
+          <label for="replenishment">Enter Replenishment Decision: </label>
+          <input type="number" id="replenishment" min="0" max="{{ max_replenishment }}" />
+          <button onclick="makeDecision()">Submit</button>
+        </div>
+      </div>
+
+      <!-- Agent Information (Right) -->
+      <div class="agent-info">
+        <h2>Agent Information</h2>
+        <div class="info-block" style="background-color: #a1dab7;"> 
+          <div>Agent Cost: <span id="agentCost">0</span></div>
+          <div>Total Agent Cost: <span id="totalAgentCost">0</span></div>
+          <div style="margin-bottom: 10px;">Agent State: <span id="agentState">[0, 0, 0]</span></div>
+          <div>Agent's replenishment: <span id="agentReplenishment">-1</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Reset and Export Buttons in the Middle -->
+    <div class="action-buttons">
+      <button onclick="resetGame()" title="Reset the game">Reset Game</button>
+      <button onclick="exportToExcel()" title="Export game records to the Excel">Export to Excel</button>
+      <button onclick="resetRecordTable()" title="Clear record table">Reset Record Table</button> 
+    </div>
+
+    <!-- Game Outcome -->
+    <div id="gameOutcome" style="display: none;"></div>
+
+    <!-- Add Table for Day's Record -->
+    <div id="record">
+      <h2>Day's Record</h2>
+      <div id="gameRecordTable">
+        <table id="gameRecords" border="1">
+          <thead>
+            <tr>
+              <th>Game Number</th>
+              <th>Day</th>
+              <th>User Replenishment</th>
+              <th>Agent Replenishment</th>
+              <th>Demand</th>
+              <th>Fulfillment Metric</th>
+              <th>Chosen Pharmacy</th>
+              <th>User Cost</th>
+              <th>Agent Cost</th>
+              <th>User State (Before)</th>
+              <th>Agent State (Before)</th>
+              <th>User State (After)</th>
+              <th>Agent State (After)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Records will be added here dynamically -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

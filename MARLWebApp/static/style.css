@@ -1,0 +1,292 @@
+/* Styling for the whole app container */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #f8f8f8;
+  font-family: Arial, sans-serif;
+  font-size: 18px;
+}
+
+/* Styling for common information like Day and Demand */
+.common-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.common-info .info-item {
+  padding: 10px 20px; /* Adds padding around each item */
+  font-size: 18px; /* Adjusts the font size for better readability */
+  background-color: #f0f0f0; /* Optional: Adds a light background for visual separation */
+  border-radius: 5px; /* Optional: Adds rounded corners */
+}
+
+/* Styling for user and agent info containers */
+.user-agent-info {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+/* User info on the left */
+.user-info {
+  flex: 1;
+  padding: 10px;
+  text-align: left;
+}
+
+/* Agent info on the right */
+.agent-info {
+  flex: 1;
+  padding: 10px;
+  text-align: right;
+}
+
+/* Styling for the info blocks (user/agent) */
+.info-block {
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  font-size: 20px;
+}
+
+/* Styling for the action buttons */
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+button {
+  font-size: 18px;
+  padding: 10px 20px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Table styling */
+#record {
+  margin-top: 20px;
+  width: 100%; /* Ensures the record div takes up full width */
+  max-height: 600px; /* Set a max height for the table container */
+  overflow-y: auto; /* Enable vertical scrolling when height is exceeded */
+  overflow-x: auto; /* Enable horizontal scrolling for long tables */
+}
+
+#gameRecords {
+  width: 100%;
+  border-collapse: collapse; /* Ensures borders are merged and aligned */
+  font-size: 18px; /* Adjusted font size for readability */
+}
+
+#gameRecords th,
+#gameRecords td {
+  padding: 12px; /* Adjusted padding for better spacing */
+  text-align: center;
+  border: 1px solid #ddd; /* Light border color for visibility */
+}
+
+#gameRecords th {
+  background-color: #007bff; /* Blue background for header */
+  color: white;
+  font-weight: bold;
+  font-size: 18px; /* Same size for consistency */
+}
+
+#gameRecords tbody tr:nth-child(even) {
+  background-color: #f2f2f2; /* Light gray background for alternating rows */
+}
+
+h1, h2 {
+  text-align: center;
+  font-size: 24px; /* Adjusted size for better readability */
+}
+
+/* Optional: Adjust the width of the columns if needed */
+#gameRecords th:nth-child(1),
+#gameRecords td:nth-child(1) { width: 80px; } /* Example width for Day column */
+#gameRecords th:nth-child(2),
+#gameRecords td:nth-child(2) { width: 150px; } /* Example width for User Replenishment column */
+
+/* Add similar rules for other columns based on your content */
+input {
+  padding: 5px;
+  margin-right: 10px;
+  width: 100px;
+  font-size: 15px;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 600px) {
+  .app-container {
+      width: 95%;
+      padding: 10px;
+  }
+
+  button,
+  input[type="number"] {
+      width: 100%;
+      margin-top: 10px;
+  }
+
+  #gameRecords {
+      font-size: 12px;
+  }
+}
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  background-color: rgba(0, 0, 0, 0.5); /* Black with opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%; /* Could be more or less, depending on screen size */
+  border-radius: 8px;
+}
+
+/* The Close Button */
+.close-btn {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+/* Position the Documentation Button in the top-right corner */
+#docBtn {
+  position: absolute;
+  top: 10px;  /* Adjust the vertical positioning */
+  right: 10px;  /* Adjust the horizontal positioning */
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* Style the image inside the button */
+.doc-image {
+  width: 40px;  /* Adjust size as needed */
+  height: 40px;
+}
+
+/* Optional: Style the image hover effect */
+#docBtn:hover .doc-image {
+  transform: scale(1.1); /* Slight zoom effect */
+}
+/* Footer Styling */
+#footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+  color: white;
+  text-align: center;
+  padding: 4px 0;
+  font-size: 12px;
+  backdrop-filter: blur(5px); /* Adds a blur effect to the background */
+  z-index: 9999;
+}
+
+/* Popup styling*/
+.popup {
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+  z-index: 9999;
+  overflow: auto; /* Ensure content is scrollable if it exceeds height */
+}
+
+.popup-content {
+  background-color: white;
+  padding: 20px;
+  margin: 10% auto;
+  border-radius: 10px;
+  width: 50%;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+  position: relative; /* Make the popup content the relative container for the close button */
+}
+
+.popup-content h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.popup-content ul {
+  list-style: none;
+  padding: 0;
+}
+
+.popup-content li {
+  padding: 8px 0;
+  font-size: 18px;
+}
+
+.popup-content li strong {
+  color: #333;
+}
+
+/* Close Button Styling */
+.popup-content .close {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 30px;
+  color: #aaa;
+  cursor: pointer;
+}
+
+.popup-content .close:hover {
+  color: #333;
+}
+
+/* Hyperparameters Button Styling */
+.icon-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: fixed;
+  top: 15px;
+  right: 60px; /* Adjust to place the button left to the documentation button */
+}
+
+.icon-button img {
+  width: 40px;
+  height: 40px;
+}
+
+
