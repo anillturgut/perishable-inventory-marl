@@ -5,7 +5,7 @@ import numpy as np
 import nashpy as nash
 import utils
 
-m = 3  # product life
+m = 2  # product life
 
 # Initialize the environment
 initial_state = [0] * m
