@@ -96,8 +96,8 @@ async function resetGame() {
       document.getElementById('userCost').innerText = 0
       document.getElementById('totalAgentCost').innerText = 0
       document.getElementById('totalUserCost').innerText = 0
-      document.getElementById('agentState').innerText = JSON.stringify([0,0,0])
-      document.getElementById('userState').innerText = JSON.stringify([0,0,0])
+      document.getElementById('agentState').innerText = JSON.stringify([0,0])
+      document.getElementById('userState').innerText = JSON.stringify([0,0])
 
       document.getElementById('gameOutcome').innerText = "";
   }
