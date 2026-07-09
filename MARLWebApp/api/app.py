@@ -10,10 +10,10 @@ import platform
 app = Flask(__name__, template_folder='../templates', static_folder='../static')
 moq = 5
 m = 3
-T = 10
+T = 6
 # Initialize the environment
 initial_state = [0] * m
-env = CompetitivePerishableInventoryPlanning(product_life=m, maximum_order_quantity=moq, planning_horizon=10, 
+env = CompetitivePerishableInventoryPlanning(product_life=m, maximum_order_quantity=moq, planning_horizon=6, 
                                              max_x=moq, initial_state=(initial_state, initial_state))
 
 if platform.system() == "Darwin":
