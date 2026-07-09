@@ -9,7 +9,7 @@ import platform
 
 app = Flask(__name__, template_folder='../templates', static_folder='../static')
 moq = 5
-m = 3
+m = 2
 T = 6
 # Initialize the environment
 initial_state = [0] * m
