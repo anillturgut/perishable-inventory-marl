@@ -73,7 +73,7 @@
         <div class="info-block" style="background-color: #ADD8E6;"> <!-- Light blue for user -->
           <div>User Cost: <span id="userCost">0</span></div>
           <div>Total User Cost: <span id="totalUserCost">0</span></div>
-          <div>User State: <span id="userState">[0, 0, 0]</span></div>
+          <div>User State: <span id="userState">[0, 0]</span></div>
           <label for="replenishment">Enter Replenishment Decision: </label>
           <input type="number" id="replenishment" min="0" max="{{ max_replenishment }}" />
           <button onclick="makeDecision()">Submit</button>
@@ -86,7 +86,7 @@
         <div class="info-block" style="background-color: #a1dab7;"> 
           <div>Agent Cost: <span id="agentCost">0</span></div>
           <div>Total Agent Cost: <span id="totalAgentCost">0</span></div>
-          <div style="margin-bottom: 10px;">Agent State: <span id="agentState">[0, 0, 0]</span></div>
+          <div style="margin-bottom: 10px;">Agent State: <span id="agentState">[0, 0]</span></div>
           <div>Agent's replenishment: <span id="agentReplenishment">-1</span></div>
         </div>
       </div>
